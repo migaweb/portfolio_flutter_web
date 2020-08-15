@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +26,7 @@ class HeaderView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                child: HeaderBody(),
+                child: HeaderBody(isMobile: size.isMobile),
               ),
               FlutterLogo(size: 250),
             ],
@@ -37,8 +38,10 @@ class HeaderView extends StatelessWidget {
 }
 
 class HeaderBody extends StatelessWidget {
+  final bool isMobile;
   const HeaderBody({
     Key key,
+    this.isMobile,
   }) : super(key: key);
 
   @override
@@ -47,26 +50,29 @@ class HeaderBody extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        AutoSizeText(
           'I\'m a Systems',
           style: GoogleFonts.montserrat(fontSize: 40.0),
           textAlign: TextAlign.left,
+          maxLines: 1,
         ),
-        Text(
+        AutoSizeText(
           'Developer < / >',
           style: GoogleFonts.montserrat(fontSize: 40.0),
           textAlign: TextAlign.left,
+          maxLines: 1,
         ),
         SizedBox(
-          height: 20,
+          height: isMobile ?? false ? 15 : 25,
         ),
-        Text(
+        AutoSizeText(
           'I have 16 years of experience in development, building beautiful apps in .NET and Flutter',
-          style: TextStyle(fontSize: 12.0),
+          style: TextStyle(fontSize: 22.0),
           textAlign: TextAlign.left,
+          maxLines: 3,
         ),
         SizedBox(
-          height: 25,
+          height: isMobile ?? false ? 15 : 25,
         ),
         FlatButton(
           shape: RoundedRectangleBorder(
@@ -76,14 +82,14 @@ class HeaderBody extends StatelessWidget {
           ),
           color: Colors.redAccent,
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 10,
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ?? false ? 6 : 15,
+              vertical: isMobile ?? false ? 8 : 17,
             ),
             child: Text(
               'Contact me',
               style: TextStyle(
-                fontSize: 12.0,
+                fontSize: isMobile ?? false ? 12.0 : 16.0,
                 color: Colors.white,
               ),
               textAlign: TextAlign.left,
@@ -113,7 +119,7 @@ class HeaderMobileView extends StatelessWidget {
         children: [
           FlutterLogo(size: height * 0.3),
           //Spacer(),
-          HeaderBody(),
+          HeaderBody(isMobile: true),
         ],
       ),
     );
