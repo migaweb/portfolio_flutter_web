@@ -3,16 +3,11 @@ import 'package:portfolio_flutter_web/constants.dart';
 import 'package:portfolio_flutter_web/skills/outline_skills_container.dart';
 
 class SkillsMobileView extends StatelessWidget {
-  final double width;
-  final double height;
-
-  const SkillsMobileView({this.width, this.height});
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-        width: width * 0.8,
+        padding: kScreenPaddingMobile,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

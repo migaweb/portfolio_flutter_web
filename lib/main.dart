@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_flutter_web/header/header_view.dart';
 import 'package:portfolio_flutter_web/navigation_bar/navigation_bar_view.dart';
 import 'package:portfolio_flutter_web/skills/skills_view.dart';
-import './navigation_bar/drawer_view.dart';
+import 'drawer/drawer_view.dart';
 import 'package:portfolio_flutter_web/projects/projects_view.dart';
 
 void main() {
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Micke',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        accentColor: Colors.amber,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: TextTheme(
           headline3:
@@ -40,6 +41,7 @@ class PortfolioView extends StatelessWidget {
     final width = media.size.width;
 
     final scrollController = ScrollController(initialScrollOffset: 1580);
+    final theme = Theme.of(context);
 
     return Scaffold(
       endDrawer: DrawerView(),
@@ -51,17 +53,13 @@ class PortfolioView extends StatelessWidget {
             NavigationBarView(height: height, width: width),
             HeaderView(height: height, width: width),
             Divider(
-              endIndent: 50,
-              indent: 50,
-              thickness: 5.0,
-              color: Colors.amber,
+              thickness: 3.0,
+              color: theme.accentColor,
             ),
             ProjectsView(),
             Divider(
-              endIndent: 50,
-              indent: 50,
-              thickness: 5.0,
-              color: Colors.amber,
+              thickness: 3.0,
+              color: theme.accentColor,
             ),
             SkillsView(),
             Container(

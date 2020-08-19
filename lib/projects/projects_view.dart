@@ -6,7 +6,11 @@ import 'package:portfolio_flutter_web/projects/project_mobile_view.dart';
 class ProjectsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return MobileDesktopViewBuilder(
-        mobileView: ProjectMobileView(), desktopView: ProjectDesktopView());
+      mobileView: ProjectMobileView(),
+      desktopView: ProjectDesktopView(),
+      showMobile: width < 800,
+    );
   }
 }

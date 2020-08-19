@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_flutter_web/models/project_item.dart';
 
+EdgeInsets kScreenPaddingDesktop = EdgeInsets.symmetric(horizontal: 20.0);
+EdgeInsets kScreenPaddingMobile = EdgeInsets.symmetric(horizontal: 10.0);
+
 List<ProjectItem> kProjectItems = [
   ProjectItem(
     title: 'DäckData',

@@ -7,16 +7,17 @@ class ProjectMobileView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
+        padding: kScreenPaddingMobile,
         child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 20,
-        ),
-        Text('Projects', style: theme.textTheme.headline3),
-        ...kProjectItems.map((e) => ProjectItemBody(item: e)).toList(),
-      ],
-    ));
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Text('Projects', style: theme.textTheme.headline3),
+            ...kProjectItems.map((e) => ProjectItemBody(item: e)).toList(),
+          ],
+        ));
   }
 }
