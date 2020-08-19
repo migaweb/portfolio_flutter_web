@@ -23,16 +23,77 @@ class HeaderView extends StatelessWidget {
           height: height * 0.8,
           width: width * 0.8,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
                 child: HeaderBody(isMobile: size.isMobile),
+                flex: 1,
               ),
-              FlutterLogo(size: 250),
+              Expanded(child: Logo()),
+              //FlutterLogo(size: 300)
             ],
           ),
         );
       },
+    );
+  }
+}
+
+class Logo extends StatefulWidget {
+  const Logo({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _LogoState createState() => _LogoState();
+}
+
+class _LogoState extends State<Logo> with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> animation;
+  @override
+  void initState() {
+    controller = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+    );
+
+    animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeInOutCubic,
+    ).drive(Tween(begin: 0, end: 2));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        controller
+          ..reset()
+          ..forward();
+      },
+      child: RotationTransition(
+        turns: animation,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Hero(
+                tag: 'logo',
+                child: Image.asset(
+                  'assets/images/micke_transp.png',
+                  fit: BoxFit.fitHeight,
+                ),
+              ), //FlutterLogo(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -46,19 +107,21 @@ class HeaderBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment:
+          isMobile ? MainAxisAlignment.start : MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeText(
           'I\'m a Systems',
-          style: GoogleFonts.montserrat(fontSize: 40.0),
+          style: theme.textTheme.headline3,
           textAlign: TextAlign.left,
           maxLines: 1,
         ),
         AutoSizeText(
           'Developer < / >',
-          style: GoogleFonts.montserrat(fontSize: 40.0),
+          style: theme.textTheme.headline3,
           textAlign: TextAlign.left,
           maxLines: 1,
         ),
@@ -112,14 +175,29 @@ class HeaderMobileView extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Container(
+      //color: Colors.lightBlue,
       height: height * 0.9,
-      width: width,
+      width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
       child: Column(
         children: [
-          FlutterLogo(size: height * 0.3),
-          //Spacer(),
-          HeaderBody(isMobile: true),
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: EdgeInsets.all(0),
+              width: double.infinity,
+              color: Colors.white,
+              child: Hero(
+                tag: 'logo',
+                child: Image.asset(
+                  'assets/images/micke_transp.png',
+                  height: double.infinity,
+                  width: double.infinity,
+                ),
+              ),
+            ),
+          ),
+          Expanded(flex: 2, child: HeaderBody(isMobile: true)),
         ],
       ),
     );
