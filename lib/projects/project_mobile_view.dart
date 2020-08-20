@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_flutter_web/components/mobile_view_builder.dart';
 import 'package:portfolio_flutter_web/constants.dart';
 import 'package:portfolio_flutter_web/projects/project_item_body.dart';
+import 'package:portfolio_flutter_web/projects/projects_view.dart';
 
 class ProjectMobileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-        padding: kScreenPaddingMobile,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Text('Projects', style: theme.textTheme.headline3),
-            ...kProjectItems.map((e) => ProjectItemBody(item: e)).toList(),
-          ],
-        ));
+    return MobileViewBuilder(
+      titleText: ProjectsView.title,
+      children: [
+        ...kProjectItems.map((e) => ProjectItemBody(item: e)).toList(),
+      ],
+    );
   }
 }
