@@ -3,10 +3,16 @@ import 'package:portfolio_flutter_web/components/mobile_desktop_view_builder.dar
 import 'package:portfolio_flutter_web/drawer/drawer_mobile_view.dart';
 
 class DrawerView extends StatelessWidget {
+  final Function onNavigate;
+
+  const DrawerView({this.onNavigate});
+
   @override
   Widget build(BuildContext context) {
     return MobileDesktopViewBuilder(
-      mobileView: DrawerMobileView(),
+      mobileView: DrawerMobileView(
+        onNavigate: onNavigate,
+      ),
       desktopView: Container(),
     );
   }

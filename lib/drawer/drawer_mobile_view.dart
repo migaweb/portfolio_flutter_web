@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio_flutter_web/navigation_bar/constants.dart';
+import 'package:portfolio_flutter_web/portfolio/portfolio_view.dart';
 
 class DrawerMobileView extends StatelessWidget {
+  final Function onNavigate;
+  DrawerMobileView({this.onNavigate});
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -21,10 +23,11 @@ class DrawerMobileView extends StatelessWidget {
               ),
             ),
           ),
-          ...kNavigationItems.map(
+          ...PortfolioView.kNavigationItems.map(
             (e) => ListTile(
               title: Text(e.text),
               onTap: () {
+                onNavigate(key: e.key);
                 Navigator.of(context).pop();
               },
             ),

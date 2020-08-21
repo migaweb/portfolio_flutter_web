@@ -1,32 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_flutter_web/components/mobile_desktop_view_builder.dart';
-import 'constants.dart';
+
+import 'package:portfolio_flutter_web/portfolio/portfolio_view.dart';
 import 'navigation_bar_item.dart';
 
 class NavigationBarView extends StatelessWidget {
   final double height;
   final double width;
   final bool isMobile;
+  final Function onNavigate;
 
-  NavigationBarView({Key key, this.height, this.width, this.isMobile})
+  NavigationBarView(
+      {Key key, this.height, this.width, this.isMobile, this.onNavigate})
       : super(key: key);
-  final Function onPressed = () {
-    print('clicked');
-  };
+
   @override
   Widget build(BuildContext context) {
     return MobileDesktopViewBuilder(
       mobileView: NavigationBarMobile(),
-      desktopView: NavigationBarDesktop(onPressed: onPressed),
+      desktopView: NavigationBarDesktop(onPressed: onNavigate),
     );
-
-    // ResponsiveBuilder(
-    //   builder: (context, size) {
-    //     if (size.isMobile)
-    //       return NavigatiobBarMobile();
-    //     return (width: width, );
-    //   },
-    // );
   }
 }
 
@@ -51,9 +44,11 @@ class NavigationBarDesktop extends StatelessWidget {
             colors: Colors.amber,
           ),
           Spacer(),
-          ...kNavigationItems.map((e) {
+          ...PortfolioView.kNavigationItems.map((e) {
             return NavigationBarItem(
-              onPressed: onPressed,
+              onPressed: () {
+                onPressed(key: e.key);
+              },
               text: e.text,
             );
           })

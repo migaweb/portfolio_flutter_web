@@ -5,6 +5,8 @@ import 'package:portfolio_flutter_web/projects/project_mobile_view.dart';
 
 class ProjectsView extends StatelessWidget {
   static const String title = 'Projects';
+  final Key key;
+  ProjectsView(this.key) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;

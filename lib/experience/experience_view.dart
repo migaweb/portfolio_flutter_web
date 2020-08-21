@@ -7,6 +7,8 @@ import 'package:portfolio_flutter_web/models/experience_data.dart';
 
 class ExperienceView extends StatelessWidget {
   static const String title = 'Experience';
+  final Key key;
+  ExperienceView(this.key) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MobileDesktopViewBuilder(
@@ -19,7 +21,6 @@ class ExperienceView extends StatelessWidget {
 class ExperienceDesktopView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return DesktopViewBuilder(
       titleText: ExperienceView.title,
       children: [
@@ -74,6 +75,5 @@ class ExperienceMobileView extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

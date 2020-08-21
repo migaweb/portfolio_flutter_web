@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_flutter_web/constants.dart';
 import 'package:portfolio_flutter_web/models/experience_data.dart';
+import 'package:portfolio_flutter_web/utils/styles.dart';
 
 class ExperienceContainer extends StatelessWidget {
   const ExperienceContainer({
@@ -10,15 +11,6 @@ class ExperienceContainer extends StatelessWidget {
 
   final ExperienceData experience;
   final int index;
-
-  TextStyle _textStyle({bool isBold, bool isGrey}) {
-    return TextStyle(
-      height: 1.3,
-      fontSize: 20,
-      fontWeight: isBold ?? false ? FontWeight.bold : FontWeight.normal,
-      color: isGrey ?? false ? Colors.grey : Colors.black,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +28,14 @@ class ExperienceContainer extends StatelessWidget {
         children: [
           Text(
             experience.company,
-            style: _textStyle(isBold: true),
+            style: textStyle(isBold: true),
           ),
           SizedBox(
             height: 10.0,
           ),
           Text(
             experience.timeline,
-            style: _textStyle(isGrey: true),
+            style: textStyle(isGrey: true),
           ),
           SizedBox(
             height: 10.0,
@@ -51,7 +43,7 @@ class ExperienceContainer extends StatelessWidget {
           for (var experience in experience.description)
             Text(
               '- $experience',
-              style: _textStyle(),
+              style: textStyle(),
             ),
         ],
       ),
